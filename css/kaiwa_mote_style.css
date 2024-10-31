@@ -612,7 +612,7 @@ text-shadow:2px 2px 0 #FFF, -2px -2px 0 #FFF,
 animation-name: btn-animation;
   animation-iteration-count: infinite;
   animation-duration: 3s;
-  animation-delay:0s;		/* アニ���ーションの開始時間指定 */
+  animation-delay:0s;		/* アニメーションの開始時間指定 */
 
 }
 
@@ -1093,4 +1093,57 @@ animation-name: btn-animation;
   padding: 0.5em;
   font-size: 0.8em;
   background-color: #FFFFFF;
+}
+
+/* FAQ セクションのスタイリング */
+.bg_white {
+    background: #ffffff; /* FAQセクションの背景を白に */
+}
+
+.faq {
+    padding: 0 0.5em 3em;
+}
+
+.faq_list ul li {
+    padding: 30px;
+    border-top: solid 1px #333; /* 境界線は暗めに保持 */
+    list-style-type: none;
+}
+
+.faq_list ul li:last-child {
+    border-bottom: solid 1px #333;
+}
+
+.faq_list dl dt .txt {
+    font-size: 110%;
+    font-weight: bold;
+    color: #222222; /* 質問テキストを黒に */
+}
+
+.faq_list dl i {
+    width: 35px;
+    height: 35px;
+    line-height: 34px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.faq_list dl i.q {
+    background: #100806; /* Q アイコンの背景は暗めに */
+}
+
+.faq_list dl i.a {
+    background: #f04974; /* A アイコンはピンクを維持 */
+}
+
+.faq_list dl dd .txt {
+    padding-top: 0px;
+    color: #222222; /* 回答テキストを黒に */
+}
+
+/* タイトル画像の背景も白に */
+.bg_white h2 {
+    background: #ffffff;
 }
