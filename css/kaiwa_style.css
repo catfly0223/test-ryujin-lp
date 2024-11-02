@@ -4,9 +4,9 @@ body {
   font-family:"游ゴシック", "Yu Gothic", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-size: 112.5%; /* 18px */
   font-size: 125%; /* 20px */
-  line-height: 1.7;
+  line-height: 1.8;
   /***	背景＆文字色設定	***/
-  color: #222;
+  color: #333;
   font-feature-settings: "palt";
   text-align: justify;
   background-color:#f2f7fb;
@@ -620,7 +620,7 @@ animation-name: btn-animation;
   animation-name: btn-animation;
   animation-iteration-count: infinite;
   animation-duration: 3s;
-  animation-delay:0s;		/* アニメーションの開始時間指定 */
+  animation-delay:0s;		/* アニメーションの開始時間指 */
 }
 .btn:hover {
   animation-duration: 0.8s;
@@ -1090,4 +1090,323 @@ animation-name: btn-animation;
   padding: 0.5em;
   font-size: 0.8em;
   background-color: #FFFFFF;
+}
+
+/* 追加のスタイル */
+.header-text {
+    font-size: 2em;
+    padding: 2em 0;
+    line-height: 1.5;
+}
+
+.subhead h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.profile-content {
+    padding: 2em;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.benefit-box {
+    background: #fff;
+    padding: 1.5em;
+    margin: 1em 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.price {
+    text-align: center;
+    font-size: 2em;
+    padding: 1em 0;
+}
+
+/* 追加のスタイル */
+.catch-copy {
+    color: #fff;
+    text-align: center;
+    font-size: 1.8em;
+    line-height: 1.8;
+    margin: 2em 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.section-text {
+    padding: 2em;
+    line-height: 1.8;
+}
+
+.section-text.white {
+    color: #fff;
+}
+
+.bg_black {
+    background-color: #100806;
+    padding: 3em 0;
+}
+
+.bg_intro {
+    background-image: url("../kaiwa_images/bg_intro.png");
+    background-size: cover;
+    padding: 3em 0;
+}
+
+.bg_feature {
+    background-color: #f5f5f5;
+    padding: 3em 0;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 1023px) {
+    .catch-copy {
+        font-size: 1.4em;
+        margin: 1.5em 0;
+    }
+
+    .section-text {
+        padding: 1.5em;
+    }
+}
+
+/* 新規追加スタイル */
+.main-copy {
+    color: #fff;
+    text-align: center;
+    font-size: 2em;
+    line-height: 2;
+    padding: 2em 1em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.section-content {
+    padding: 3em 2em;
+    color: #333;
+}
+
+.bg_black .section-content {
+    color: #fff;
+}
+
+.bg_profile {
+    background: #f5f5f5;
+}
+
+.profile-box {
+    background: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.check-list {
+    background: #fff;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.check-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.check-list li {
+    padding: 1em;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 2.5em;
+}
+
+.check-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 1em;
+    color: #4CAF50;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 1023px) {
+    .main-copy {
+        font-size: 1.5em;
+        padding: 1.5em 1em;
+    }
+
+    .section-content {
+        padding: 2em 1em;
+    }
+}
+
+/* 基本設定の追加 */
+body {
+    line-height: 1.8;
+    color: #333;
+}
+
+/* セクションスタイル */
+.section-content {
+    padding: 4em 2em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.content-box {
+    font-size: 1.1em;
+    line-height: 2;
+}
+
+.content-box p {
+    margin-bottom: 1.5em;
+}
+
+/* 背景色設定 */
+.bg_navy {
+    background-color: #1a2b49;
+    color: #fff;
+}
+
+.bg_gray {
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+.bg_white {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.bg_accent {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+/* プロフィールボックス */
+.profile-box {
+    background: #fff;
+    color: #333;
+    padding: 2.5em;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* チェックリスト */
+.check-list {
+    background: #fff;
+    color: #333;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* その他のスタイルは同じ */
+
+/* フォント設定の調整 */
+.main-copy {
+    font-size: 2.4em;
+    line-height: 1.8;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.section-title {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 1.8em;
+    letter-spacing: 0.05em;
+    position: relative;
+    padding-bottom: 0.5em;
+}
+
+.section-title:after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #ff6b6b;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.content-box {
+    font-size: 1.2em;
+    line-height: 2.2;
+    letter-spacing: 0.03em;
+}
+
+.content-box p {
+    margin-bottom: 2em;
+}
+
+/* プロフィールセクションの強化 */
+.profile-box {
+    padding: 3em;
+}
+
+.profile-name {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 2em;
+    letter-spacing: 0.05em;
+}
+
+.highlight {
+    font-size: 1.3em;
+    color: #ff6b6b;
+    font-weight: 700;
+    line-height: 1.8;
+    margin-bottom: 2em;
+}
+
+/* チェックリストの改善 */
+.check-list li {
+    font-size: 1.2em;
+    padding: 1.5em 1em 1.5em 3em;
+    line-height: 1.6;
+}
+
+.check-list li:before {
+    content: "\f00c"; /* FontAwesomeのチェックマーク */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1.2em;
+    color: #ff6b6b;
+    left: 1em;
+}
+
+/* セクション間の余白調整 */
+.section-content {
+    padding: 5em 2em;
+}
+
+/* レスポンシブ対応の調整 */
+@media screen and (max-width: 1023px) {
+    .main-copy {
+        font-size: 1.8em;
+    }
+
+    .section-title {
+        font-size: 1.6em;
+    }
+
+    .content-box {
+        font-size: 1.1em;
+        line-height: 2;
+    }
+
+    .check-list li {
+        font-size: 1.1em;
+        padding: 1.2em 1em 1.2em 2.5em;
+    }
 }
