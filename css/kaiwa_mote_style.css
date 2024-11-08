@@ -37,6 +37,8 @@ header {
   padding: 2em 1.5em;
   max-width: 650px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-title {
@@ -46,11 +48,10 @@ header {
   text-align: center;
   line-height: 1.4;
   padding: 0.5em 1em;
-  white-space: normal;
+  position: relative;
+  max-width: 100%;
   word-wrap: break-word;
   word-break: keep-all;
-  max-width: 100%;
-  position: relative;
 }
 
 .content-box {
@@ -59,11 +60,15 @@ header {
   max-width: 600px;
   margin: 0 auto;
   text-align: left;
+  word-break: normal;
+  word-wrap: break-word;
+  padding: 0 15px;
 }
 
 .content-box p {
   text-align: left;
   margin-bottom: 1.5em;
+  display: block;
 }
 
 /* 最後の段落には余白を付けない */
@@ -344,8 +349,17 @@ address {
 .highlight-yellow {
     background: linear-gradient(transparent 60%, rgba(255, 255, 102, 0.4) 40%);
     padding: 0.2em 0.5em;
-    border-radius: 4px;
+    border-radius: 8px;
     display: inline-block;
+    margin: 0 0.2em;
+}
+
+/* 白背景のコンテンツ内（アコーディオンなど）でのハイライト */
+.accordion-content .highlight-yellow {
+    text-shadow: none;
+    color: #000;
+    background: rgba(255, 255, 0, 0.7);
+    padding: 2px 4px;
 }
 
 /* 赤文字 */
@@ -403,7 +417,7 @@ address {
     background: linear-gradient(to right, #ff69b4, rgba(255,105,180,0.3));
 }
 
-/* 特典ボックスをより魅力的に */
+/* 特典ボックスをより有力的に */
 .benefit-item {
     background: linear-gradient(135deg, #2a1a2a 0%, #1a0f1a 100%);
     border: 1px solid rgba(255,105,180,0.2);
@@ -650,4 +664,97 @@ address {
 
 .neon-button .benefit-text {
     font-size: 0.7em;
+}
+
+/* メディアクエリを追加してモバイル対応 */
+@media screen and (max-width: 768px) {
+    .section-title {
+        font-size: clamp(1.1em, 3.5vw, 1.4em);
+        padding: 0.5em 0.8em;
+    }
+}
+
+/* PCでのセクションタイトルの最大幅を設定 */
+@media screen and (min-width: 769px) {
+    .section-title {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* 2行ヘッダーの1行目用のクラス */
+.section-title-first {
+    font-size: clamp(1.2em, 4vw, 1.6em);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+    padding: 0.5em 1em 0.2em; /* 下部のパディングを小さく */
+    position: relative;
+    max-width: 100%;
+    word-wrap: break-word;
+    word-break: keep-all;
+    margin-bottom: 0; /* 下マージンを削除 */
+}
+
+/* 2行ヘッダーの2行目用のスタイル調整 */
+.section-title-first + .section-title {
+    margin-top: 0; /* 上マージンを削除 */
+    padding-top: 0; /* 上パディングを削除 */
+}
+
+/* メディアクエリの調整 */
+@media screen and (max-width: 768px) {
+    .section-title-first {
+        font-size: clamp(1.1em, 3.5vw, 1.4em);
+        padding: 0.5em 0.8em 0.2em;
+    }
+}
+
+/* アコーディオンコンテンツ内のハイライト調整 */
+.accordion-content p {
+    line-height: 1.8;
+    margin-bottom: 1em;
+    word-break: normal;
+    word-wrap: normal;
+}
+
+/* コーディオンコンテンツ内のハイライト調整 */
+.accordion-content .highlight-yellow {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(transparent 0%, rgba(255, 255, 0, 0.7) 0%);
+}
+
+/* 黒背景用のハイライト */
+.bg_black .highlight-yellow {
+    background: rgba(255, 255, 0, 0.85);
+    padding: 2px 4px;
+    margin: 0;
+    display: inline;
+    white-space: normal;
+    position: relative;
+    z-index: 1;
+    line-height: inherit;
+    word-break: normal;
+    word-wrap: normal;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* アコーディオンコンテンツ（白背景）用のハイライト */
+.accordion-content .highlight-yellow {
+    background: linear-gradient(transparent 0%, rgba(255, 255, 0, 0.7) 0%);
+    text-shadow: none;
+    color: #000;
+    padding: 2px 4px;
+    display: inline;
+    line-height: inherit;
 }
