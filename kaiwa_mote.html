@@ -72,6 +72,18 @@
                         <h2 class="section-title">プロフィール</h2>
                         <div class="profile-box">
                             <h3 class="profile-name">遠坂寅縫（とおさかいんぬい）</h3>
+                            
+                            <!-- プロフィール画像スライダーを追加 -->
+                            <div class="profile-slider">
+                                <div class="slider-container">
+                                    <button class="slider-button prev">&#10094;</button>
+                                    <div class="slider-image">
+                                        <img src="kaiwa_images/profile_pics/profile_00.jpg" alt="プロフィール画像">
+                                    </div>
+                                    <button class="slider-button next">&#10095;</button>
+                                </div>
+                            </div>
+                            
                             <div class="profile-text">
                                 <p class="highlight">著書は紀伊国屋書店2週間連続売上1位<br>
                                 アインツベルン結婚相談所プロデュース</p>
@@ -454,6 +466,45 @@
                 
                 item.classList.toggle('active');
             });
+        });
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = [
+            'kaiwa_images/profile_pics/profile_00.jpg',
+            'kaiwa_images/profile_pics/profile_01.jpg',
+            'kaiwa_images/profile_pics/profile_02.jpg',
+            'kaiwa_images/profile_pics/profile_03.jpg',
+            'kaiwa_images/profile_pics/profile_04.jpg',
+            'kaiwa_images/profile_pics/profile_05.jpg',
+            'kaiwa_images/profile_pics/profile_06.jpg',
+            'kaiwa_images/profile_pics/profile_07.jpg',
+            'kaiwa_images/profile_pics/profile_08.jpg',
+            'kaiwa_images/profile_pics/profile_09.jpg',
+            'kaiwa_images/profile_pics/profile_10.jpg',
+            'kaiwa_images/profile_pics/profile_11.jpg',
+            'kaiwa_images/profile_pics/profile_12.jpg'
+            // 必要に応じて画像を追加
+        ];
+        
+        let currentIndex = 0;
+        const sliderImage = document.querySelector('.slider-image img');
+        const prevButton = document.querySelector('.slider-button.prev');
+        const nextButton = document.querySelector('.slider-button.next');
+        
+        function updateImage() {
+            sliderImage.src = images[currentIndex];
+        }
+        
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImage();
+        });
+        
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImage();
         });
     });
     </script>

@@ -62,7 +62,6 @@ header {
   text-align: left;
   word-break: normal;
   word-wrap: break-word;
-  padding: 0 15px;
 }
 
 .content-box p {
@@ -485,7 +484,7 @@ address {
     box-shadow: 0 4px 15px rgba(255,0,255,0.08);
 }
 
-/* 最後のアイテムの下マージンを削除 */
+/* 最後のア���テムの下マージンを削除 */
 .testimonial-item:last-child {
     margin-bottom: 0;
 }
@@ -757,4 +756,85 @@ address {
     padding: 2px 4px;
     display: inline;
     line-height: inherit;
+}
+
+/* プロフィールスライダーのスタイル */
+.profile-slider {
+    margin: 20px auto;
+    padding: 0;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+}
+
+.slider-image {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.slider-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.slider-button.prev {
+    left: -50px;
+}
+
+.slider-button.next {
+    right: -50px;
+}
+
+.slider-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .profile-slider {
+        padding: 0 40px;
+    }
+    
+    .slider-button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .slider-button.prev {
+        left: 0;
+    }
+
+    .slider-button.next {
+        right: 0;
+    }
 }
