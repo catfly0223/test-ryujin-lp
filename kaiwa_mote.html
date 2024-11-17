@@ -326,7 +326,7 @@
                 <div class="bg_black"></div>
                     <div class="section-content">
                         <div class="cta-container">
-                            <a href="https://google.com" class="neon-button">
+                            <a href="#" class="neon-button" id="purchase-button">
                                 今すぐ購入する<br>
                                 <span class="price-text">4,980円</span><br>
                             </a>
@@ -385,7 +385,7 @@
                 <div class="bg_black">
                     <div class="section-content">
                         <div class="cta-container">
-                            <a href="https://google.com" class="neon-button">
+                            <a href="#" class="neon-button" id="purchase-button">
                                 今すぐ購入する<br>
                                 <span class="price-text">4,980円</span><br>
                             </a>
@@ -505,6 +505,51 @@
         nextButton.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % images.length;
             updateImage();
+        });
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // URLパラメータからref_idを取得する関数
+        function getRefId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('ref_id') || urlParams.get('id') || '';
+        }
+
+        // 基本となる購入URLを設定
+        const BASE_PURCHASE_URL = 'https://example.com/purchase';
+        
+        // すべての購入ボタンを取得
+        const purchaseButtons = document.querySelectorAll('#purchase-button');
+        
+        // ref_idを取得
+        const refId = getRefId();
+        
+        // 各購入ボタンのURLを更新
+        purchaseButtons.forEach(button => {
+            let targetUrl = BASE_PURCHASE_URL;
+            
+            // ref_idが存在する場合、URLに追加
+            if (refId) {
+                targetUrl += `?ref_id=${encodeURIComponent(refId)}`;
+            }
+            
+            // ボタンのhref属性を更新
+            button.href = targetUrl;
+            
+            // クリックイベントでトラッキングなども可能
+            button.addEventListener('click', function(e) {
+                // 必要に応じてトラッキングコードを追加
+                console.log(`Purchase clicked with ref_id: ${refId}`);
+                
+                // GTMイベントの発火例
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({
+                        'event': 'purchase_button_click',
+                        'ref_id': refId
+                    });
+                }
+            });
         });
     });
     </script>
