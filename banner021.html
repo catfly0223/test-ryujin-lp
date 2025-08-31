@@ -11,6 +11,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-TFZKT54N');</script>
 <!-- End Google Tag Manager -->
 
+<script>
+(function() {
+    // banner021の各バージョンに対応するnuifbマッピング
+    const bannerToNuifbMapping = {
+        'banner021_01': 'nuifb15',
+        'banner021_06': 'nuifb16', 
+        'banner021_07': 'nuifb17',
+        'banner021_09': 'nuifb18'
+    };
+
+    function getBannerRedirectURL() {
+        // URLパラメータから直接bannerバージョンを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const bannerParam = urlParams.get('banner');
+        if (bannerParam && bannerToNuifbMapping[bannerParam]) {
+            const nuifbKey = bannerToNuifbMapping[bannerParam];
+            return `redirect.html?nuifb=${nuifbKey}`;
+        }
+
+        // 現在のURLからbanner021_XXパターンを検出
+        const currentURL = window.location.href;
+        const currentMatch = currentURL.match(/banner021_(\d{2})/);
+        if (currentMatch) {
+            const bannerKey = 'banner021_' + currentMatch[1];
+            if (bannerToNuifbMapping[bannerKey]) {
+                const nuifbKey = bannerToNuifbMapping[bannerKey];
+                return `redirect.html?nuifb=${nuifbKey}`;
+            }
+        }
+
+        // リファラーURLからbanner021_XXパターンを検出
+        const referrer = document.referrer;
+        if (referrer) {
+            const match = referrer.match(/banner021_(\d{2})/);
+            if (match) {
+                const bannerKey = 'banner021_' + match[1];
+                if (bannerToNuifbMapping[bannerKey]) {
+                    const nuifbKey = bannerToNuifbMapping[bannerKey];
+                    return `redirect.html?nuifb=${nuifbKey}`;
+                }
+            }
+        }
+
+        // デフォルトはbanner021_01（nuifb15）
+        return 'redirect.html?nuifb=nuifb15';
+    }
+
+    // リダイレクトURLを動的に設定
+    const redirectURL = getBannerRedirectURL();
+    
+    // DOMが読み込まれた後にリンクを更新
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('a[href*="nuifb"]');
+        links.forEach(function(link) {
+            const fullURL = 'https://catfly0223.github.io/test-ryujin-lp/' + redirectURL;
+            link.href = fullURL;
+        });
+    });
+})();
+</script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
@@ -62,11 +122,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </header>
     <main>
       <div class="form">
-				<form class="submit">
-					<a href="https://catfly0223.github.io/test-ryujin-lp/nuifb17_redirect">
-		<img class="btn" src="kaiwa_images/button.png" ></a>
-					
-				</form></div><!-- /form	-->
+			<form class="submit">
+				<a href="#" class="dynamic-redirect">
+	<img class="btn" src="kaiwa_images/button.png" ></a>
+				
+			</form></div><!-- /form	-->
 
       <div class="bg_intro">
         <div class="intro"> <img src="kaiwa_images/intro.png"></div>
@@ -83,7 +143,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bg_white"><img class="cta_cap" src="kaiwa_images/cta.png"></div>
             <div class="form">
               <form class="submit">
-                <a href="https://catfly0223.github.io/test-ryujin-lp/nuifb17_redirect">
+                <a href="#" class="dynamic-redirect">
           <img class="btn" src="kaiwa_images/button.png" ></a>
                 
               </form></div><!-- /form	-->
@@ -110,11 +170,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="bg_white"><img class="cta_cap" src="kaiwa_images/cta2.png"></div>
       </div>
       <div class="form">
-				<form class="submit">
-					<a href="https://catfly0223.github.io/test-ryujin-lp/nuifb17_redirect">
-		<img class="btn" src="kaiwa_images/button.png" ></a>
-					
-				</form></div><!-- /form	-->
+			<form class="submit">
+				<a href="#" class="dynamic-redirect">
+	<img class="btn" src="kaiwa_images/button.png" ></a>
+				
+			</form></div><!-- /form	-->
         <section class="bg_benefit">
           <h2><img src="kaiwa_images/benefit_title.png"></h2>
           <div class="benefit">
@@ -130,7 +190,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </section>
                     <div class="form">
                       <form class="submit">
-                        <a href="https://catfly0223.github.io/test-ryujin-lp/nuifb17_redirect">
+                        <a href="#" class="dynamic-redirect">
                   <img class="btn" src="kaiwa_images/button.png" ></a>
                         
                       </form></div><!-- /form	-->
@@ -260,7 +320,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </address>
   </footer>
   <div class="flbtn">
-    <a class="" href="https://catfly0223.github.io/test-ryujin-lp/nuifb17_redirect">
+    <a class="dynamic-redirect" href="#">
 
       <img class="pconly" src="kaiwa_images/button_pc.png">
       <img class="sponly" src="kaiwa_images/button.png">
