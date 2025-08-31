@@ -13,42 +13,106 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script>
 (function() {
-    // banner021の各バージョンに対応するnuifbマッピング
-    const bannerToNuifbMapping = {
+    // 統合マッピング: banner021とkaiwa_nt両方のパターンに対応
+    const unifiedMapping = {
+        // banner021系
         'banner021_01': 'nuifb15',
         'banner021_06': 'nuifb16', 
         'banner021_07': 'nuifb17',
-        'banner021_09': 'nuifb18'
+        'banner021_09': 'nuifb18',
+        
+        // kaiwa_nt系
+        'kaiwa_nt_dg01_design': 'nuifb12',
+        'kaiwa_nt_dg01_design01': 'nuifb12',
+        'kaiwa_nt_dg01_design02': 'nuifb13',
+        'kaiwa_nt_dg01_design03': 'nuifb14',
+        'kaiwa_nt_dg06_design': 'nuifb13',
+        'kaiwa_nt_dg06': 'nuifb02',
+        'kaiwa_nt_dg07_02': 'nuifb04',
+        'kaiwa_nt_dg07_03': 'nuifb05',
+        'kaiwa_nt_dg07_04': 'nuifb06',
+        'kaiwa_nt_dg07_05': 'nuifb07',
+        'kaiwa_nt_dg07_06': 'nuifb08',
+        'kaiwa_nt_dg07_07': 'nuifb09',
+        'kaiwa_nt_dg07_08': 'nuifb10',
+        'kaiwa_nt_dg07_design': 'nuifb14',
+        'kaiwa_nt_dg07': 'nuifb03',
+        'kaiwa_nt_dgmovie_001_01': 'nuifb11'
     };
 
-    function getBannerRedirectURL() {
-        // URLパラメータから直接bannerバージョンを取得
+    function getUnifiedRedirectURL() {
+        // URLパラメータから直接キーを取得
         const urlParams = new URLSearchParams(window.location.search);
+        
+        // bannerパラメータをチェック
         const bannerParam = urlParams.get('banner');
-        if (bannerParam && bannerToNuifbMapping[bannerParam]) {
-            const nuifbKey = bannerToNuifbMapping[bannerParam];
+        if (bannerParam && unifiedMapping[bannerParam]) {
+            const nuifbKey = unifiedMapping[bannerParam];
             return `redirect.html?nuifb=${nuifbKey}`;
         }
-
-        // 現在のURLからbanner021_XXパターンを検出
-        const currentURL = window.location.href;
-        const currentMatch = currentURL.match(/banner021_(\d{2})/);
-        if (currentMatch) {
-            const bannerKey = 'banner021_' + currentMatch[1];
-            if (bannerToNuifbMapping[bannerKey]) {
-                const nuifbKey = bannerToNuifbMapping[bannerKey];
+        
+        // kaiwaパラメータをチェック
+        const kaiwaParam = urlParams.get('kaiwa');
+        if (kaiwaParam && unifiedMapping[kaiwaParam]) {
+            const nuifbKey = unifiedMapping[kaiwaParam];
+            return `redirect.html?nuifb=${nuifbKey}`;
+        }
+        
+        // typeパラメータでページタイプを指定（banner または kaiwa）
+        const typeParam = urlParams.get('type');
+        const idParam = urlParams.get('id');
+        if (typeParam && idParam) {
+            let key;
+            if (typeParam === 'banner') {
+                key = `banner021_${idParam}`;
+            } else if (typeParam === 'kaiwa') {
+                key = idParam; // kaiwa_nt_xxxxx は完全なキー名
+            }
+            
+            if (key && unifiedMapping[key]) {
+                const nuifbKey = unifiedMapping[key];
                 return `redirect.html?nuifb=${nuifbKey}`;
             }
         }
 
-        // リファラーURLからbanner021_XXパターンを検出
+        // 現在のURLから各パターンを検出
+        const currentURL = window.location.href;
+        
+        // banner021パターンの検出
+        const bannerMatch = currentURL.match(/banner021_(\d{2})/);
+        if (bannerMatch) {
+            const bannerKey = 'banner021_' + bannerMatch[1];
+            if (unifiedMapping[bannerKey]) {
+                const nuifbKey = unifiedMapping[bannerKey];
+                return `redirect.html?nuifb=${nuifbKey}`;
+            }
+        }
+        
+        // kaiwa_ntパターンの検出
+        for (const key in unifiedMapping) {
+            if (key.startsWith('kaiwa_nt_') && currentURL.includes(key)) {
+                const nuifbKey = unifiedMapping[key];
+                return `redirect.html?nuifb=${nuifbKey}`;
+            }
+        }
+
+        // リファラーURLから各パターンを検出
         const referrer = document.referrer;
         if (referrer) {
-            const match = referrer.match(/banner021_(\d{2})/);
-            if (match) {
-                const bannerKey = 'banner021_' + match[1];
-                if (bannerToNuifbMapping[bannerKey]) {
-                    const nuifbKey = bannerToNuifbMapping[bannerKey];
+            // bannerパターンのチェック
+            const referrerBannerMatch = referrer.match(/banner021_(\d{2})/);
+            if (referrerBannerMatch) {
+                const bannerKey = 'banner021_' + referrerBannerMatch[1];
+                if (unifiedMapping[bannerKey]) {
+                    const nuifbKey = unifiedMapping[bannerKey];
+                    return `redirect.html?nuifb=${nuifbKey}`;
+                }
+            }
+            
+            // kaiwa_ntパターンのチェック
+            for (const key in unifiedMapping) {
+                if (key.startsWith('kaiwa_nt_') && referrer.includes(key)) {
+                    const nuifbKey = unifiedMapping[key];
                     return `redirect.html?nuifb=${nuifbKey}`;
                 }
             }
@@ -59,11 +123,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     // リダイレクトURLを動的に設定
-    const redirectURL = getBannerRedirectURL();
+    const redirectURL = getUnifiedRedirectURL();
     
     // DOMが読み込まれた後にリンクを更新
     document.addEventListener('DOMContentLoaded', function() {
-        const links = document.querySelectorAll('a[href*="nuifb"]');
+        const links = document.querySelectorAll('a[href*="nuifb"], a.dynamic-redirect');
         links.forEach(function(link) {
             const fullURL = 'https://catfly0223.github.io/test-ryujin-lp/' + redirectURL;
             link.href = fullURL;
@@ -122,11 +186,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </header>
     <main>
       <div class="form">
-			<form class="submit">
-				<a href="#" class="dynamic-redirect">
-	<img class="btn" src="kaiwa_images/button.png" ></a>
-				
-			</form></div><!-- /form	-->
+		<form class="submit">
+			<a href="#" class="dynamic-redirect">
+<img class="btn" src="kaiwa_images/button.png" ></a>
+			
+		</form></div><!-- /form	-->
 
       <div class="bg_intro">
         <div class="intro"> <img src="kaiwa_images/intro.png"></div>
@@ -170,11 +234,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="bg_white"><img class="cta_cap" src="kaiwa_images/cta2.png"></div>
       </div>
       <div class="form">
-			<form class="submit">
-				<a href="#" class="dynamic-redirect">
-	<img class="btn" src="kaiwa_images/button.png" ></a>
-				
-			</form></div><!-- /form	-->
+		<form class="submit">
+			<a href="#" class="dynamic-redirect">
+<img class="btn" src="kaiwa_images/button.png" ></a>
+			
+		</form></div><!-- /form	-->
         <section class="bg_benefit">
           <h2><img src="kaiwa_images/benefit_title.png"></h2>
           <div class="benefit">
