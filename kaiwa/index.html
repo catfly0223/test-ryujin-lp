@@ -282,11 +282,10 @@
   <!--/flbtn-->
   <script src="../js/modernizr-custom.js"></script>
   <script>
-    // MonthlyImageChangerクラスのインスタンスを生成
-    const monthlyImageChanger = new MonthlyImageChanger("image-container", "monthly-image");
-    
     // 動的LINE URL設定
     document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOMContentLoaded - LINE URL設定開始');
+      
       // CR番号を取得（複数の方法に対応）
       function getKaiwaCrNumber() {
         // 1. URLパラメータから取得: kaiwa/?cr=xx または kaiwa/?cr=01
@@ -295,16 +294,20 @@
         if (crParam) {
           // "01", "02" などの文字列も正しく数値に変換
           const crNumber = parseInt(crParam, 10);
+          console.log(`CR parameter found: ${crParam} → ${crNumber}`);
           return isNaN(crNumber) ? 1 : crNumber;
         }
         
         // 2. パスから取得: /kaiwa/xx/ 形式
         const pathMatch = window.location.pathname.match(/\/kaiwa\/(\d+)\/?/);
         if (pathMatch) {
-          return parseInt(pathMatch[1], 10);
+          const crNumber = parseInt(pathMatch[1], 10);
+          console.log(`CR from path: ${pathMatch[1]} → ${crNumber}`);
+          return crNumber;
         }
         
         // 3. デフォルト
+        console.log('No CR parameter found, using default: 1');
         return 1;
       }
       
@@ -341,6 +344,7 @@
           lineUrl = COMMON_LINE_URLS[0];
         }
         usedConfig = true;
+        console.log('config.js を使用してLINE URLを設定');
       } else {
         // フォールバック: 内蔵のLINE URLsを使用
         if (crNumber >= 1 && crNumber <= kaiwaLineUrls.length) {
@@ -348,28 +352,35 @@
         } else {
           lineUrl = kaiwaLineUrls[0];
         }
+        console.log('フォールバック用のLINE URLsを使用');
       }
       
       // 全てのLINEボタンリンクを動的なLINE URLに設定
       const lineButtons = document.querySelectorAll('.line-button');
-      lineButtons.forEach(function(link) {
-        link.href = lineUrl;
-        // 新しいタブで開くように設定
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
+      console.log(`LINEボタンを ${lineButtons.length} 個発見`);
+      
+      lineButtons.forEach(function(link, index) {
+        console.log(`ボタン${index + 1}: ${link.href} → ${lineUrl} に変更`);
         
-        // クリックイベントでページ内スクロールを防止
+        // 直接的にhrefを設定
+        link.href = lineUrl;
+        
+        // クリックイベントを追加（確実にリダイレクトするため）
         link.addEventListener('click', function(e) {
-          // href="#"によるページ上部へのスクロールを防止
+          console.log(`ボタン${index + 1}がクリックされました: ${lineUrl} に移動`);
           e.preventDefault();
+          
+          // 新しいタブで開く
           window.open(lineUrl, '_blank', 'noopener,noreferrer');
         });
       });
       
-      console.log(`Kaiwa page: CR${crNumber} → ${lineUrl}`);
-      console.log(`Config.js loaded: ${usedConfig}`);
-      console.log(`Current URL: ${window.location.href}`);
-      console.log(`Updated ${lineButtons.length} LINE buttons`);
+      console.log(`=== 設定完了 ===`);
+      console.log(`CR番号: ${crNumber}`);
+      console.log(`LINE URL: ${lineUrl}`);
+      console.log(`config.js使用: ${usedConfig}`);
+      console.log(`現在のURL: ${window.location.href}`);
+      console.log(`更新したボタン数: ${lineButtons.length}`);
     });
   </script>
 </body>
