@@ -67,7 +67,7 @@
     <main>
       <div class="form">
         <form class="submit">
-          <a href="javascript:void(0)" class="line-button">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -88,7 +88,7 @@
       <div class="bg_white"><img class="cta_cap" src="../kaiwa_images/cta.png"></div>
       <div class="form">
         <form class="submit">
-          <a href="javascript:void(0)" class="line-button">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -117,7 +117,7 @@
       </div>
       <div class="form">
         <form class="submit">
-          <a href="javascript:void(0)" class="line-button">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -137,7 +137,7 @@
       </section>
       <div class="form">
         <form class="submit">
-          <a href="javascript:void(0)" class="line-button">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -272,7 +272,7 @@
     </address>
   </footer>
   <div class="flbtn">
-    <a class="" href="javascript:void(0)" class="line-button">
+    <a href="#" class="line-button">
 
       <img class="pconly" src="../kaiwa_images/button_pc.png">
       <img class="sponly" src="../kaiwa_images/button.png">
@@ -289,17 +289,19 @@
     document.addEventListener('DOMContentLoaded', function() {
       // CR番号を取得（複数の方法に対応）
       function getKaiwaCrNumber() {
-        // 1. URLパラメータから取得: kaiwa/?cr=xx
+        // 1. URLパラメータから取得: kaiwa/?cr=xx または kaiwa/?cr=01
         const urlParams = new URLSearchParams(window.location.search);
         const crParam = urlParams.get('cr');
         if (crParam) {
-          return parseInt(crParam);
+          // "01", "02" などの文字列も正しく数値に変換
+          const crNumber = parseInt(crParam, 10);
+          return isNaN(crNumber) ? 1 : crNumber;
         }
         
         // 2. パスから取得: /kaiwa/xx/ 形式
         const pathMatch = window.location.pathname.match(/\/kaiwa\/(\d+)\/?/);
         if (pathMatch) {
-          return parseInt(pathMatch[1]);
+          return parseInt(pathMatch[1], 10);
         }
         
         // 3. デフォルト
@@ -359,10 +361,8 @@
         // クリックイベントでページ内スクロールを防止
         link.addEventListener('click', function(e) {
           // href="#"によるページ上部へのスクロールを防止
-          if (this.href === lineUrl) {
-            e.preventDefault();
-            window.open(lineUrl, '_blank', 'noopener,noreferrer');
-          }
+          e.preventDefault();
+          window.open(lineUrl, '_blank', 'noopener,noreferrer');
         });
       });
       
