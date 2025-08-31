@@ -67,7 +67,7 @@
     <main>
       <div class="form">
         <form class="submit">
-          <a href="#" class="line-button">
+          <a href="javascript:void(0)" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -88,7 +88,7 @@
       <div class="bg_white"><img class="cta_cap" src="../kaiwa_images/cta.png"></div>
       <div class="form">
         <form class="submit">
-          <a href="#" class="line-button">
+          <a href="javascript:void(0)" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -117,7 +117,7 @@
       </div>
       <div class="form">
         <form class="submit">
-          <a href="#" class="line-button">
+          <a href="javascript:void(0)" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -137,7 +137,7 @@
       </section>
       <div class="form">
         <form class="submit">
-          <a href="#" class="line-button">
+          <a href="javascript:void(0)" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -272,7 +272,7 @@
     </address>
   </footer>
   <div class="flbtn">
-    <a class="" href="#" class="line-button">
+    <a class="" href="javascript:void(0)" class="line-button">
 
       <img class="pconly" src="../kaiwa_images/button_pc.png">
       <img class="sponly" src="../kaiwa_images/button.png">
@@ -355,6 +355,15 @@
         // 新しいタブで開くように設定
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
+        
+        // クリックイベントでページ内スクロールを防止
+        link.addEventListener('click', function(e) {
+          // href="#"によるページ上部へのスクロールを防止
+          if (this.href === lineUrl) {
+            e.preventDefault();
+            window.open(lineUrl, '_blank', 'noopener,noreferrer');
+          }
+        });
       });
       
       console.log(`Kaiwa page: CR${crNumber} → ${lineUrl}`);
