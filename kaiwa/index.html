@@ -67,7 +67,7 @@
     <main>
       <div class="form">
         <form class="submit">
-          <a href="https://catfly0223.github.io/test-ryujin-lp/nuifb01_redirect">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -88,7 +88,7 @@
       <div class="bg_white"><img class="cta_cap" src="../kaiwa_images/cta.png"></div>
       <div class="form">
         <form class="submit">
-          <a href="https://catfly0223.github.io/test-ryujin-lp/nuifb01_redirect">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -117,7 +117,7 @@
       </div>
       <div class="form">
         <form class="submit">
-          <a href="https://catfly0223.github.io/test-ryujin-lp/nuifb01_redirect">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -137,7 +137,7 @@
       </section>
       <div class="form">
         <form class="submit">
-          <a href="https://catfly0223.github.io/test-ryujin-lp/nuifb01_redirect">
+          <a href="#" class="line-button">
             <img class="btn" src="../kaiwa_images/button.png"></a>
 
         </form>
@@ -272,7 +272,7 @@
     </address>
   </footer>
   <div class="flbtn">
-    <a class="" href="https://catfly0223.github.io/test-ryujin-lp/nuifb01_redirect">
+    <a class="" href="#" class="line-button">
 
       <img class="pconly" src="../kaiwa_images/button_pc.png">
       <img class="sponly" src="../kaiwa_images/button.png">
@@ -348,9 +348,9 @@
         }
       }
       
-      // 全ての旧リダイレクトリンクを新しいLINE URLに置き換え
-      const redirectLinks = document.querySelectorAll('a[href*="nuifb01_redirect"]');
-      redirectLinks.forEach(function(link) {
+      // 全てのLINEボタンリンクを動的なLINE URLに設定
+      const lineButtons = document.querySelectorAll('.line-button');
+      lineButtons.forEach(function(link) {
         link.href = lineUrl;
         // 新しいタブで開くように設定
         link.target = '_blank';
@@ -360,7 +360,7 @@
       console.log(`Kaiwa page: CR${crNumber} → ${lineUrl}`);
       console.log(`Config.js loaded: ${usedConfig}`);
       console.log(`Current URL: ${window.location.href}`);
-      console.log(`Updated ${redirectLinks.length} links`);
+      console.log(`Updated ${lineButtons.length} LINE buttons`);
     });
   </script>
 </body>
